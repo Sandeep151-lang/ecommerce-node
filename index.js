@@ -2,6 +2,8 @@ const express = require('express')
 const product = require('./api/product')
 const app = express()
 const cors = require('cors')
+const bodyParser = require('body-parser');
+
 
 
 var usersRouter = require('./routes/users');
@@ -9,8 +11,10 @@ var productRouter = require('./routes/createProduct');
 var admin = require('./routes/admin')
 var payment = require('./routes/payments');
 
-
 app.use(cors({origin:"*"}))
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 
 app.use(function (req, res, next) {
