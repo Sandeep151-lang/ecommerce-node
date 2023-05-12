@@ -14,7 +14,7 @@ require('../dbcon/conn');
 
 
 //post method admin can register 
-router.post('/admin/register', async (req, res, next) => {
+router.post('/register', async (req, res, next) => {
     const { name, email, password } = req.body
     if (!name || !email || !password) {
         return res.status(400).send({ message: 'plz filled the data' });
@@ -39,7 +39,7 @@ router.post('/admin/register', async (req, res, next) => {
 
 
 //admin login post method 
-router.post('/admin/login', async (req, res, next) => {
+router.post('/login', async (req, res, next) => {
     const { email, password } = req.body;
     try {
         if (!email || !password) {

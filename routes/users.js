@@ -74,7 +74,7 @@ return res.status(400).send({ message: 'error' })
 
 
 //GET METHOD  ALL THE USERS LIST
-router.get('/user', async function (req, res, next) {
+router.get('/list', async function (req, res, next) {
   await User.find().then((doc) => {
     return res.send({ item: doc })
   })

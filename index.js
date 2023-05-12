@@ -22,10 +22,10 @@ app.use(function (req, res, next) {
 
 // app.use('/', indexRouter);
 app.use("/api/product",product)
-app.use('/', usersRouter);
-app.use('/', productRouter);
-app.use('/', admin);
-app.use('/', payment);
+app.use('/user', usersRouter);
+app.use('/product', productRouter);
+app.use('/admin', admin);
+app.use('/payment', payment);
 
 
 app.listen( 5000, (err,d)=>{
