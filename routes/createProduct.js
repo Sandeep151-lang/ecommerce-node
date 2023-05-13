@@ -10,39 +10,6 @@ var adminAuth = require('../authenticate/adminauth');
 
 require('../dbcon/conn');
 
-//create images multer use
-// const storage = multer.diskStorage({
-//     destination: function (req, file, cb) {
-//         cb(null, 'uploads/')
-//     },
-//     filename: function (req, file, cb) {
-//         console.log(file)
-//         cb(null, Date.now() + path.extname(file.originalname))
-//     }
-// })
-// const upload = multer({ storage: storage })
-var s3 = new aws.S3({
-    accessKeyId: 'AKIA4DEAPXUBEYEBQ6AJ',
-    secretAccessKey: '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',
-    region: 'ap-south-1'
-
-})
-var uploads3 = multer({
-    storage: multerS3({
-        s3: s3,
-        bucket: 'ecommerce-clone-app',
-        acl: 'public-read',
-        metadata: function (req, file, cb) {
-
-            cb(null, { fieldName: file.fieldname });
-        },
-        key: function (req, file, cb) {
-
-            cb(null, Date.now() + file.originalname)
-        }
-    })
-})
-
 
 //admin authenticate middleware 
 const adminrole = (req, res, next) => {
@@ -57,6 +24,7 @@ const adminrole = (req, res, next) => {
 
 //Post method creating products
 router.post('/create', async function (req, res) {
+
     if(!req?.body?.product_name || !req?.body?.product_price || !req?.body?.product_description){
         return res.status(400).json({message:'plz filled the required field'})
     }
@@ -67,6 +35,7 @@ router.post('/create', async function (req, res) {
             product_name: req?.body?.product_name,
             product_price: req?.body?.product_price,
             product_description: req?.body?.product_description,
+            product_image:req?.body?.product_image
             // product_image: req?.file?.location
             // product_image:imagefile
         })
