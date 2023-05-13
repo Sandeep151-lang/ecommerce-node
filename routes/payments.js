@@ -20,7 +20,7 @@ router.post('/list', async (req, res) => {
                 source: token,
             })
             .then(customer => {
-                const payment = stripe.charges.create({
+                const payment = stripe?.charges?.create({
                     amount: total * 100,
                     currency: "inr",
                     customer: customer.id
@@ -33,11 +33,11 @@ router.post('/list', async (req, res) => {
                         cartItems: cart,
                         total: total,
                         shippingAddress: {
-                            name: address.name,
-                            country: address.address_country,
-                            city: address.address_city,
-                            address: address.address_line1,
-                            pincode: address.address_zip
+                            name: address?.name,
+                            country: address?.address_country,
+                            city: address?.address_city,
+                            address: address?.address_line1,
+                            pincode: address?.address_zip
                         }
                     })
                     const orders = order.save();

@@ -14,7 +14,7 @@ const jwtAuthAdmin = async (req, res, next) => {
         req.userID = rootUser._id;
         next()
     } catch {
-        res.status(401).json({ message: `error` })
+        res.status(401).json({ message: `Token Expired` })
     }
 }
 
