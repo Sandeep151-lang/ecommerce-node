@@ -93,7 +93,7 @@ router.get('/about', jwtAuth, (req, res) => {
 })
 
 //GET METHODS FOR LOGOUT TO CLEAR COOKIES
-router.get('/logout', async (req, res) => {
+router.post('/logout', async (req, res) => {
   try{
      res.clearCookie('jwt', { path: '/' });
  return res.status(200).json({ message: `logout successfull` })

@@ -81,7 +81,7 @@ const adminrole = (req, res, next) => {
     }
 }
 
-router.get('/list', async function (req, res, next) {
+router.post('/list', async function (req, res, next) {
     const PAGE_SOZE = 5;
     const page = parseInt(req.query.page || "0");
     const total = await orderlist.countDocuments({});

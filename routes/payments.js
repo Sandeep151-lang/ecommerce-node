@@ -11,7 +11,6 @@ require('../dbcon/conn');
 //Post method Stripe is used for payment  gateway
 router.post('/list', async (req, res) => {
     try {
-        console.log(req.body.token, req.body.total);
         const { token, total, cart, name, email, id, address } = req.body
 
         stripe.customers
