@@ -17,7 +17,7 @@ const adminrole = (req, res, next) => {
         next();
     } else {
         
-        return res.status(500).json({ message: `only admin can access` })
+        return res.status(500).json({ message: `Only admin can access` })
     }
 }
 
@@ -25,8 +25,8 @@ const adminrole = (req, res, next) => {
 //Post method creating products
 router.post('/create', async function (req, res) {
 
-    if(!req?.body?.product_name || !req?.body?.product_price || !req?.body?.product_description){
-        return res.status(400).json({message:'plz filled the required field'})
+    if(!req?.body?.product_name || !req?.body?.product_price || !req?.body?.product_description || req?.body?.product_image){
+        return res.status(400).json({message:'Please filled the required field'})
     }
 
     try {
@@ -40,13 +40,13 @@ router.post('/create', async function (req, res) {
             // product_image:imagefile
         })
         await product.save().then(() => {
-            res.status(201).json({ message: `product created successfully`, file: req.files })
+           return res.status(201).json({ message: `Product created successfully` })
 
         }).catch(() => {
-            res.status(400).json({ message: `product not created` })
+           return res.status(400).json({ message: `Product not created` })
         })
     } catch {
-        res.status(400).json({ message: `Product not created` })
+       return res.status(400).json({ message: `Product not created` })
     }
 })
 
@@ -58,11 +58,10 @@ router.post('/getproduct', async function (req, res) {
     const total = await Product.countDocuments({});
     try {
         await Product.find().limit(PAGE_SOZE).skip(PAGE_SOZE * page).then((doc) => {
-            res.status(200).json({ message: doc, totalPages: Math.ceil(total / PAGE_SOZE),totalRecords:total })
-
+          return  res.status(200).json({ message: doc, totalPages: Math.ceil(total / PAGE_SOZE),totalRecords:total })
         })
     } catch {
-      return  res.status(400).json({ message: `product not get` })
+      return  res.status(400).json({ message: `Product not get` })
     }
 });
 
@@ -71,10 +70,10 @@ router.delete('/item/:_id', async (req, res) => {
 
     try {
         await Product.deleteOne({ _id: req.params._id }).then((item) => {
-            return res.json({ message: 'deleted' })
+            return res.json({ message: 'Deleted Successfully' })
         })
     } catch {
-        return res.status(400).json({ message: `error` })
+        return res.status(400).json({ message: `Something Went Wrong` })
     }
 
 })
