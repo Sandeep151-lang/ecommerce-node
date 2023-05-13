@@ -97,7 +97,7 @@ router.post('/list', async function (req, res, next) {
 
 
 
-router.get('/product/:_id', async (req, res) => {
+router.post('/product/:_id', async (req, res) => {
     try {
         await orderlist.findOne({ _id: req.params._id }).then((item) => {
             return res.send({ item: item })
